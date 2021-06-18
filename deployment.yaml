@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-k8s-yaml
+  name: ik8s-bd
   labels:
-    app: node-k8s-yaml
+    app: ik8s-bd
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: node-k8s-yaml
+      app: ik8s-bd
   template:
     metadata:
       labels:
-        app: node-k8s-yaml
+        app: ik8s-bd
     spec:
       containers:
-      - name: node-k8s
-        image: uk.icr.io/luis/node-k8s:1.0
+      - name: ik8s-bd
+        image: uk.icr.io/lureyit/ik8s:2.0
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
