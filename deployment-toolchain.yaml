@@ -1,0 +1,49 @@
+# Update <REGISTRY> <NAMESPACE> values before use
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ik8s-bd
+  labels:
+    app: ik8s-bd
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ik8s-toolchain
+  template:
+    metadata:
+      labels:
+        app: ik8s-toolchain
+    spec:
+      containers:
+      - name: ik8s-toolchain
+        image: uk.icr.io/lureyit/ik8s:2.0
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        env:
+        - name: CLOUDANT_URL
+          valueFrom:
+            secretKeyRef:
+              name: cloudant
+              key: url
+              optional: true
+        - name: CLOUDANT_IAM_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cloudant
+              key: iamApiKey
+              optional: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ik8s-toolchain
+  labels:
+    app: ik8s-toolchain
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: ik8s-toolchain
+  type: NodePort
