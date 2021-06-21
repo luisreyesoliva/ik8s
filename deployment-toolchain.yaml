@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ik8s-bd
+  name: ik8s-toolchain
   labels:
-    app: ik8s-bd
+    app: ik8s-toolchain
 spec:
   replicas: 2
   selector:
