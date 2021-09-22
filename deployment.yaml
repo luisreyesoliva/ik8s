@@ -6,7 +6,7 @@ metadata:
   labels:
     app: ik8s-demo2
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: ik8s-demo2
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: ik8s-demo2
-        image: uk.icr.io/lureyit/ik8s:demo2
+        image: uk.icr.io/lureyit/ik8s:demo1
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
